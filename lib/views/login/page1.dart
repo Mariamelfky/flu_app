@@ -23,6 +23,7 @@ class _page1State extends State<page1> {
     super.initState();
     getCashedEmail();
   }
+  
   Widget build(BuildContext context) {
     return Center(child: Text("page1\n $email"));
   }

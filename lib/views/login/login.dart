@@ -1,6 +1,6 @@
-import 'package:first_app/login/page1.dart';
-import 'package:first_app/login/page2.dart';
-import 'package:first_app/login/page3.dart';
+import 'package:first_app/views/login/page1.dart';
+import 'package:first_app/views/login/page2.dart';
+import 'package:first_app/views/login/page3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
