@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "425853628516",
+    "project_id": "fluapp-1343e",
+    "storage_bucket": "fluapp-1343e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425853628516:android:bbaaf238a4ad3146352f71",
+        "android_client_info": {
+          "package_name": "com.example.first_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425853628516-rkvcvkskm71k1a6hs6ov0i36v3jv66b9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs3IQRluV1Ckd1TPQH8Yckan8Bxz82zxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425853628516-rkvcvkskm71k1a6hs6ov0i36v3jv66b9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

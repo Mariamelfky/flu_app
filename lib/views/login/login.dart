@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class login extends StatefulWidget {
   
   const login({super.key});
@@ -18,6 +18,8 @@ class _loginState extends State<login> {
   
     final _formKey = GlobalKey<FormState>();
     TextEditingController emailcontroller =TextEditingController();
+    TextEditingController passwordcontroller =TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +53,7 @@ class _loginState extends State<login> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child:TextFormField(
+              controller: passwordcontroller,
               decoration: InputDecoration(labelText: "passoword"),
               validator: (value) {
                 if (value == null || value.length<8) {
@@ -64,21 +67,29 @@ class _loginState extends State<login> {
           InkWell(
             onTap: () async {
               if (_formKey.currentState!.validate()){
+                bool result = await fireBaseLogin(emailcontroller.text,passwordcontroller.text);
+
                 final SharedPreferences prefs = await SharedPreferences.getInstance();
                 await prefs.setString('email', emailcontroller.text);
-
-                Navigator.push(
+                if (result == true){
+                  Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => home(
                       email:emailcontroller.text,
                     )),        
                 );
-                ScaffoldMessenger.of(context).showSnackBar(
+
+                }else{
+                   ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text("success"),
+                    content: Text("login faild"),
                     ),
                 );
+                }
+
+                
+               
               }
             },
             child:           Container(
@@ -118,4 +129,22 @@ class _loginState extends State<login> {
         ))
     );
   }
+ Future<bool> fireBaseLogin(String email,String password) async {
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email:email,
+      password:password
+      );
+  if(userCredential.user != null){
+    return true;
+    }
+  } on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    print('The password provided is too weak.');
+  } else if (e.code == 'email-already-in-use') {
+    print('The account already exists for that email.');
+  }
+}
+return false;
+ }
 }
